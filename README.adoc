@@ -1,0 +1,5 @@
+= A Nix Flake for the OneDrive Client at abraunegg.github.io
+
+The code here is based on the Nixpkgs implementation of onedrive.
+
+TODO: Write a real README.
