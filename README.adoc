@@ -4,4 +4,4 @@ The code here is based on the Nixpkgs implementation of onedrive. Once
 installed, use the software the same way you would use the Nixpkgs
 implementation with its systemd option enabled.
 
-TODO: Write a real README.
+TODO/FIXME: Write a real README.
