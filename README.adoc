@@ -1,7 +1,20 @@
 = A Nix Flake for the OneDrive Client at abraunegg.github.io
 
-The code here is based on the Nixpkgs implementation of onedrive. Once
-installed, use the software the same way you would use the Nixpkgs
-implementation with its systemd option enabled.
+The code here is based on the Nixpkgs implementation of the ‘onedrive’
+package.
 
-TODO/FIXME: Write a real README.
+You can download a tarball from one of the tagged versions, and then
+run the configure script. It is controlled by the settings of some of
+what are called ‘precious variables’ (in Autoconf
+terminology). Alternatively, you can use a pre-configured flake
+directly from the GitHub repository. For example,
+
+[source,nix]
+----
+onedrive = {
+  url = "github:chemoelectric-nixos/onedrive-flake/version-1.0.1?dir=build%2Fx86_64-linux%2Frelease-25.05%2Fonedrive-2.5.6%2Fsystemd-true";
+};
+----
+
+is a setting for an AMD64 GNU/Linux system with NixOS 25.05, using
+systemd to control onedrive.
