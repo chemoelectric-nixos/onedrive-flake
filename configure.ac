@@ -62,7 +62,7 @@ AC_CONFIG_COMMANDS([flake-diversification],
     for nixpkgs in ${nixpkgs_list}; do
       for onedrive in ${onedrive_list}; do
         for systemd in ${systemd_list}; do
-	  destdir="${builddir}/${system}/${nixpkgs}/${onedrive}/systemd-${systemd}"
+	  destdir="${builddir}/${system}/${nixpkgs}/onedrive-${onedrive}/systemd-${systemd}"
           ${MKDIR_P} "${destdir}"
 	  ${SED} < "${srcdir}"/flake.nix.in > "${destdir}"/flake.nix \
 	  	 -e "s/@SYSTEM@/${system}/g" \
