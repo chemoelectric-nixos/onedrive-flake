@@ -505,6 +505,7 @@ _ASBOX
 
   MKDIR_P="/run/current-system/sw/bin/mkdir -p"
   SED="/run/current-system/sw/bin/sed"
+  NIXFMT="nixfmt"
   srcdir=/home/trashman/src/chemoelectric-nixos/onedrive-flake
   builddir=/home/trashman/src/chemoelectric-nixos/onedrive-flake/build
   system_list="x86_64-linux aarch64-linux x86_64-darwin aarch64-darwin"
@@ -712,6 +713,7 @@ printf "%s\n" "$as_me: executing $ac_file commands" >&6;}
 	  	 -e "s/@NIXPKGS_VERSION@/${nixpkgs}/g" \
 	  	 -e "s/@ONEDRIVE_VERSION@/${onedrive}/g" \
 	  	 -e "s/@WITH_SYSTEMD@/${systemd}/g"
+ 	  ${NIXFMT} "${destdir}"/flake.nix
 	done
       done
     done

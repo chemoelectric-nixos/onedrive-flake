@@ -39,7 +39,7 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      packages = rec {
+      packages.aarch64-darwin = rec {
 
         default = onedrive;
 

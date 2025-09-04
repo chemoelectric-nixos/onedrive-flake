@@ -24,6 +24,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 
 AC_PROG_MKDIR_P
 AC_PROG_SED
+AC_CHECK_PROGS([NIXFMT],[nixfmt])
 
 onedrive_versions='2.5.6'
 nixpkgs_versions='release-25.05 nixos-unstable'
@@ -69,6 +70,7 @@ AC_CONFIG_COMMANDS([flake-diversification],
 	  	 -e "s/@NIXPKGS_VERSION@/${nixpkgs}/g" \
 	  	 -e "s/@ONEDRIVE_VERSION@/${onedrive}/g" \
 	  	 -e "s/@WITH_SYSTEMD@/${systemd}/g"
+ 	  ${NIXFMT} "${destdir}"/flake.nix
 	done
       done
     done
@@ -77,6 +79,7 @@ AC_CONFIG_COMMANDS([flake-diversification],
 [
   MKDIR_P="${MKDIR_P}"
   SED="${SED}"
+  NIXFMT="${NIXFMT}"
   srcdir=`realpath "${srcdir}"`
   builddir=`realpath "$(pwd)"`
   system_list="${SYSTEM}"

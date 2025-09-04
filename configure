@@ -613,6 +613,7 @@ WITH_SYSTEMD
 ONEDRIVE_VERSION
 NIXPKGS_VERSION
 SYSTEM
+NIXFMT
 SED
 MKDIR_P
 target_alias
@@ -1960,6 +1961,54 @@ printf "%s\n" "$ac_cv_path_SED" >&6; }
  SED="$ac_cv_path_SED"
   rm -f conftest.sed
 
+for ac_prog in nixfmt
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+printf %s "checking for $ac_word... " >&6; }
+if test ${ac_cv_prog_NIXFMT+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if test -n "$NIXFMT"; then
+  ac_cv_prog_NIXFMT="$NIXFMT" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir$ac_word$ac_exec_ext"; then
+    ac_cv_prog_NIXFMT="$ac_prog"
+    printf "%s\n" "$as_me:${as_lineno-$LINENO}: found $as_dir$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi ;;
+esac
+fi
+NIXFMT=$ac_cv_prog_NIXFMT
+if test -n "$NIXFMT"; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $NIXFMT" >&5
+printf "%s\n" "$NIXFMT" >&6; }
+else
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+fi
+
+
+  test -n "$NIXFMT" && break
+done
+
 
 onedrive_versions='2.5.6'
 nixpkgs_versions='release-25.05 nixos-unstable'
@@ -2680,6 +2729,7 @@ cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
 
   MKDIR_P="${MKDIR_P}"
   SED="${SED}"
+  NIXFMT="${NIXFMT}"
   srcdir=`realpath "${srcdir}"`
   builddir=`realpath "$(pwd)"`
   system_list="${SYSTEM}"
@@ -2890,6 +2940,7 @@ printf "%s\n" "$as_me: executing $ac_file commands" >&6;}
 	  	 -e "s/@NIXPKGS_VERSION@/${nixpkgs}/g" \
 	  	 -e "s/@ONEDRIVE_VERSION@/${onedrive}/g" \
 	  	 -e "s/@WITH_SYSTEMD@/${systemd}/g"
+ 	  ${NIXFMT} "${destdir}"/flake.nix
 	done
       done
     done

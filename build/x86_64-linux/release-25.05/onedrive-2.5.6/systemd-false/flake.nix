@@ -39,7 +39,7 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      packages = rec {
+      packages.x86_64-linux = rec {
 
         default = onedrive;
 
