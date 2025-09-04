@@ -1,6 +1,6 @@
 # Copyright (c) 2003-2025 Eelco Dolstra and the Nixpkgs/NixOS contributors
 # Copyright (c) 2025 Barry Schwartz
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 # distribute, sublicense, and/or sell copies of the Software, and to
 # permit persons to whom the Software is furnished to do so, subject to
 # the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,31 +25,25 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      flake-utils,
-      ...
-    }:
+    { self, nixpkgs, ... }:
+    let
+      system = "x86_64-linux";
+      withSystemd = false;
+      lib = nixpkgs.lib;
+      owner = "abraunegg";
+      pname = "onedrive";
+      version = "2.5.6";
+      pkgs = import nixpkgs { inherit system; };
+    in
+    {
+      packages = rec {
 
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        withSystemd = true;
-        lib = nixpkgs.lib;
-        owner = "abraunegg";
-        pname = "onedrive";
-        version = "2.5.6";
-        pkgs = import nixpkgs {
-          inherit system;
-        };
-      in
-      rec {
-        packages.onedrive = pkgs.stdenv.mkDerivation (var: {
+        default = onedrive;
+
+        onedrive = pkgs.stdenv.mkDerivation (var: {
           name = pname + "-" + version;
           pname = pname;
           version = version;
@@ -110,7 +104,7 @@
             platforms = lib.platforms.linux;
           };
         });
-        packages.default = packages.onedrive;
-      }
-    );
+
+      };
+    };
 }
