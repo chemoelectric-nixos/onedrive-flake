@@ -17,7 +17,7 @@
 #
 
 AC_PREREQ([2.72])
-AC_INIT([onedrive-flake],[1.1.0])
+AC_INIT([onedrive-flake],[1.1.1])
 
 AC_CONFIG_SRCDIR([this.is.onedrive-flake])
 AC_CONFIG_AUX_DIR([build-aux])

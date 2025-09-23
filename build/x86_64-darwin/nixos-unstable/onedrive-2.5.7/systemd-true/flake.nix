@@ -37,6 +37,14 @@
       pname = "onedrive";
       version = "2.5.7";
       pkgs = import nixpkgs { inherit system; };
+      hash-for =
+        version:
+        if version == "2.5.6" then
+          "sha256-AFaz1RkrtsdTZfaWobdcADbzsAhbdCzJPkQX6Pa7hN8="
+        else if version == "2.5.7" then
+          "sha256-IllPh4YJvoAAyXDmSNwWDHN/EUtUuUqS7TOnBpr3Yts="
+        else
+          "";
     in
     {
       packages.x86_64-darwin = rec {
@@ -51,7 +59,7 @@
             owner = owner;
             repo = pname;
             rev = "refs/tags/v${version}";
-            hash = "sha256-AFaz1RkrtsdTZfaWobdcADbzsAhbdCzJPkQX6Pa7hN8=";
+            hash = hash-for version;
           };
           nativeBuildInputs = [
             pkgs.autoreconfHook
@@ -82,12 +90,18 @@
               --bash contrib/completions/complete.bash \
               --fish contrib/completions/complete.fish \
               --zsh contrib/completions/complete.zsh
-
-            for s in $out/lib/systemd/user/onedrive.service $out/lib/systemd/system/onedrive@.service; do
-              substituteInPlace $s \
-                --replace-fail "/usr/bin/sleep" "${pkgs.coreutils}/bin/sleep"
-            done
-          '';
+          ''
+          + (
+            if version == "2.5.6" then
+              ''
+                for s in $out/lib/systemd/user/onedrive.service $out/lib/systemd/system/onedrive@.service; do
+                  substituteInPlace $s \
+                    --replace-fail "/usr/bin/sleep" "${pkgs.coreutils}/bin/sleep"
+                done
+              ''
+            else
+              ""
+          );
 
           passthru = {
             tests.version = pkgs.testers.testVersion {
