@@ -17,7 +17,7 @@
 #
 
 AC_PREREQ([2.72])
-AC_INIT([onedrive-flake],[1.1.2])
+AC_INIT([onedrive-flake],[1.1.3])
 
 AC_CONFIG_SRCDIR([this.is.onedrive-flake])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -26,7 +26,7 @@ AC_PROG_MKDIR_P
 AC_PROG_SED
 AC_CHECK_PROGS([NIXFMT],[nixfmt])
 
-onedrive_versions='2.5.6 2.5.7'
+onedrive_versions='2.5.9'
 nixpkgs_versions='release-25.05 nixos-unstable'
 systems='x86_64-linux aarch64-linux x86_64-darwin aarch64-darwin'
 

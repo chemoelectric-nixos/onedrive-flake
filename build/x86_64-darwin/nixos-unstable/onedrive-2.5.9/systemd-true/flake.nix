@@ -24,18 +24,18 @@
   description = "A Nix flake for abraunegg/onedrive";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/@NIXPKGS_VERSION@";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs =
     { self, nixpkgs, ... }:
     let
-      system = "@SYSTEM@";
-      withSystemd = @WITH_SYSTEMD@;
+      system = "x86_64-darwin";
+      withSystemd = true;
       lib = nixpkgs.lib;
       owner = "abraunegg";
       pname = "onedrive";
-      version = "@ONEDRIVE_VERSION@";
+      version = "2.5.9";
       pkgs = import nixpkgs { inherit system; };
       hash-for =
         version:
@@ -49,7 +49,7 @@
           "";
     in
     {
-      packages.@SYSTEM@ = rec {
+      packages.x86_64-darwin = rec {
 
         default = onedrive;
 
@@ -93,15 +93,17 @@
               --fish contrib/completions/complete.fish \
               --zsh contrib/completions/complete.zsh
           ''
-          +
-          (if version == "2.5.6" then ''
-            for s in $out/lib/systemd/user/onedrive.service $out/lib/systemd/system/onedrive@.service; do
-              substituteInPlace $s \
-                --replace-fail "/usr/bin/sleep" "${pkgs.coreutils}/bin/sleep"
-            done
-          ''
-           else
-             "");
+          + (
+            if version == "2.5.6" then
+              ''
+                for s in $out/lib/systemd/user/onedrive.service $out/lib/systemd/system/onedrive@.service; do
+                  substituteInPlace $s \
+                    --replace-fail "/usr/bin/sleep" "${pkgs.coreutils}/bin/sleep"
+                done
+              ''
+            else
+              ""
+          );
 
           passthru = {
             tests.version = pkgs.testers.testVersion {
