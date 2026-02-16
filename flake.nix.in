@@ -30,13 +30,12 @@
   outputs =
     { self, nixpkgs, ... }:
     let
-      system = "@SYSTEM@";
       withSystemd = @WITH_SYSTEMD@;
       lib = nixpkgs.lib;
       owner = "abraunegg";
       pname = "onedrive";
       version = "@ONEDRIVE_VERSION@";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { };
       hash-for =
         version:
         if version == "2.5.6" then
@@ -49,7 +48,7 @@
           "";
     in
     {
-      packages.@SYSTEM@ = rec {
+      packages.stdenv.hostPlatform.@SYSTEM@ = rec {
 
         default = onedrive;
 
