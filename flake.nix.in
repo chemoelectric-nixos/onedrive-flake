@@ -30,8 +30,7 @@
   outputs =
     { self, nixpkgs, ... }:
     let
-      system = "@SYSTEM@";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = nixpkgs.legacyPackages."@SYSTEM@";
       lib = nixpkgs.lib;
 
       withSystemd = @WITH_SYSTEMD@;
