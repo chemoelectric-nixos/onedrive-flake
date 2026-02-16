@@ -1,5 +1,5 @@
 # Copyright (c) 2003-2025 Eelco Dolstra and the Nixpkgs/NixOS contributors
-# Copyright (c) 2025 Barry Schwartz
+# Copyright (c) 2025, 2026 Barry Schwartz
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -31,12 +31,14 @@
     { self, nixpkgs, ... }:
     let
       system = "x86_64-darwin";
-      withSystemd = false;
+      pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
+
+      withSystemd = false;
       owner = "abraunegg";
       pname = "onedrive";
       version = "2.5.9";
-      pkgs = import nixpkgs { inherit system; };
+
       hash-for =
         version:
         if version == "2.5.6" then

@@ -1,5 +1,5 @@
 # Copyright (c) 2003-2025 Eelco Dolstra and the Nixpkgs/NixOS contributors
-# Copyright (c) 2025 Barry Schwartz
+# Copyright (c) 2025, 2026 Barry Schwartz
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -30,12 +30,15 @@
   outputs =
     { self, nixpkgs, ... }:
     let
-      withSystemd = @WITH_SYSTEMD@;
+      system = "@SYSTEM@";
+      pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
+
+      withSystemd = @WITH_SYSTEMD@;
       owner = "abraunegg";
       pname = "onedrive";
       version = "@ONEDRIVE_VERSION@";
-      pkgs = import nixpkgs { };
+
       hash-for =
         version:
         if version == "2.5.6" then
@@ -48,7 +51,7 @@
           "";
     in
     {
-      packages.stdenv.hostPlatform.@SYSTEM@ = rec {
+      packages.@SYSTEM@ = rec {
 
         default = onedrive;
 

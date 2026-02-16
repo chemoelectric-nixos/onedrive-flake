@@ -12,7 +12,7 @@ directly from the GitHub repository. For example,
 [source,nix]
 ----
 onedrive = {
-  url = "github:chemoelectric-nixos/onedrive-flake/v1.1.4?dir=build%2Fx86_64-linux%2Frelease-25.11%2Fonedrive-2.5.9%2Fsystemd-true";
+  url = "github:chemoelectric-nixos/onedrive-flake/v1.1.5?dir=build%2Fx86_64-linux%2Frelease-25.11%2Fonedrive-2.5.9%2Fsystemd-true";
 };
 ----
 
