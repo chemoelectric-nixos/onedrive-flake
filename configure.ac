@@ -1,5 +1,5 @@
 #
-# Copyright © 2025 Barry Schwartz
+# Copyright © 2025, 2026 Barry Schwartz
 #
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License, as
@@ -17,7 +17,7 @@
 #
 
 AC_PREREQ([2.72])
-AC_INIT([onedrive-flake],[1.1.3])
+AC_INIT([onedrive-flake],[1.1.4])
 
 AC_CONFIG_SRCDIR([this.is.onedrive-flake])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -27,7 +27,7 @@ AC_PROG_SED
 AC_CHECK_PROGS([NIXFMT],[nixfmt])
 
 onedrive_versions='2.5.9'
-nixpkgs_versions='release-25.05 nixos-unstable'
+nixpkgs_versions='release-25.05 release-25.11 nixos-unstable'
 systems='x86_64-linux aarch64-linux x86_64-darwin aarch64-darwin'
 
 AC_ARG_VAR([SYSTEM],[such as "x86_64-linux aarch64-linux" (space separated)])
@@ -35,7 +35,7 @@ if test "${ac_cv_env_SYSTEM_set}" != set; then
    SYSTEM="${systems}"
 fi
 
-AC_ARG_VAR([NIXPKGS_VERSION],[such as "release-25.05 nixos-unstable" (space separated)])
+AC_ARG_VAR([NIXPKGS_VERSION],[such as "release-25.05 release-25.11 nixos-unstable" (space separated)])
 if test "${ac_cv_env_NIXPKGS_VERSION_set}" != set; then
    NIXPKGS_VERSION="${nixpkgs_versions}"
 fi
